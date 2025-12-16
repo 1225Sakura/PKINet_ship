@@ -601,10 +601,9 @@ class PKINet(BaseModule):
         assert set(out_indices).issubset(
             i for i in range(len(arch_setting) + 1))
         if frozen_stages not in range(-1, len(arch_setting) + 1):
-            raise ValueError(
-                f'frozen_stages must be in range(-1, '
-                f'len(arch_setting) + 1). '
-                f'But received {frozen_stages}')
+            raise ValueError(f'frozen_stages must be in range(-1, '
+                             f'len(arch_setting) + 1). '
+                             f'But received {frozen_stages}')
 
         self.out_indices = out_indices
         self.frozen_stages = frozen_stages
@@ -649,10 +648,9 @@ class PKINet(BaseModule):
     def init_weights(self):
         logger = MMLogger.get_current_instance()
         if self.init_cfg is None:
-            logger.warning(
-                f'No pre-trained weights for '
-                f'{self.__class__.__name__}, '
-                f'training start from scratch.')
+            logger.warning(f'No pre-trained weights for '
+                           f'{self.__class__.__name__}, '
+                           f'training start from scratch.')
             for m in self.modules():
                 if isinstance(m, nn.Linear):
                     trunc_normal_init(m, std=.02, bias=0.)

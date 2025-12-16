@@ -26,6 +26,7 @@ def test_standard_prior_generator():
 def test_strides():
     """Test strides."""
     from mmrotate.core import RotatedAnchorGenerator
+
     # Square strides
     self = RotatedAnchorGenerator([10], [1.], [1.], [10])
     anchors = self.grid_priors([(2, 2)], device='cpu')

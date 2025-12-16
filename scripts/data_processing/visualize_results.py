@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 """可视化三个数据集的预测结果"""
+import mmcv
 import os
 import random
-
-import mmcv
 from mmdet.apis import inference_detector, init_detector
 
 

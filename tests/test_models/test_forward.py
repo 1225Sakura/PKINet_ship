@@ -1,11 +1,10 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 """pytest tests/test_forward.py."""
 import copy
-from os.path import dirname, exists, join
-
 import numpy as np
 import pytest
 import torch
+from os.path import dirname, exists, join
 
 
 def _get_config_directory():

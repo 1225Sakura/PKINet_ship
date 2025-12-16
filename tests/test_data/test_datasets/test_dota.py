@@ -1,10 +1,9 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+import numpy as np
 import os.path as osp
+import pytest
 import shutil
 import tempfile
-
-import numpy as np
-import pytest
 from mmdet.datasets import build_dataset
 
 from mmrotate.datasets.dota import DOTADataset

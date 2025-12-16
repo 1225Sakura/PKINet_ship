@@ -6,7 +6,6 @@
 import shutil
 import xml.etree.ElementTree as ET
 from pathlib import Path
-
 from tqdm import tqdm
 
 
@@ -78,8 +77,9 @@ def convert_dosr_dataset(dosr_dir, output_dir):
         # 转换每个文件
         for file_name in tqdm(file_names, desc=f"转换{split}"):
             # 转换XML到txt
-            xml_file = (dosr_dir / 'Annotations_8_parameters_version' /
-                        f'{file_name}.xml')
+            xml_file = (
+                dosr_dir / 'Annotations_8_parameters_version' /
+                f'{file_name}.xml')
 
             if not xml_file.exists():
                 print(f"  警告: {xml_file} 不存在")
