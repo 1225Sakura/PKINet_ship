@@ -36,6 +36,7 @@ def test_sar_dataset(angle_version):
         version=angle_version,
         ann_file='tests/data/labelTxt/',
         img_prefix='tests/data/images/',
+        filter_empty_gt=False,  # Don't filter out samples
         pipeline=train_pipeline)
     dataset = build_dataset(data_config)
     assert dataset.CLASSES == ['plane']

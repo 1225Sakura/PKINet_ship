@@ -54,6 +54,7 @@ def test_dota_dataset(angle_version):
         ann_file='tests/data/labelTxt/',
         img_prefix='tests/data/images/',
         classes=('plane', ),
+        filter_empty_gt=False,  # Don't filter out samples
         pipeline=train_pipeline)
     single_dataset = build_dataset(single_class_config)
     fake_results = _create_dummy_results()
