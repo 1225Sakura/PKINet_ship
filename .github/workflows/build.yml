@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        python-version: [3.7]
+        python-version: [3.8]
         torch: [1.6.0, 1.7.0, 1.8.0, 1.9.0]
         include:
           - torch: 1.6.0
@@ -65,7 +65,7 @@ jobs:
         LANG: C.UTF-8
     strategy:
       matrix:
-        python-version: [3.7]
+        python-version: [3.8]
         torch: [1.6.0+cu101, 1.7.0+cu101, 1.8.0+cu101]
         include:
           - torch: 1.6.0+cu101
@@ -126,7 +126,7 @@ jobs:
       image: pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
     strategy:
       matrix:
-        python-version: [3.7]
+        python-version: [3.8]
         torch: [1.9.0+cu102]
         include:
           - torch: 1.9.0+cu102
@@ -191,7 +191,7 @@ jobs:
       matrix:
         os: [windows-2022]
         # Currently, mmdet has some bugs in win-py3.8-cu111
-        python: [3.7]
+        python: [3.8]
         platform: [cpu, cu102]
     steps:
       - uses: actions/checkout@v2
