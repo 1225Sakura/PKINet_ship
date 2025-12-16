@@ -48,17 +48,24 @@ def test_dota_dataset(angle_version):
                                'soccer-ball-field', 'roundabout', 'harbor',
                                'swimming-pool', 'helicopter')
 
-    # test eval
-    dataset.CLASSES = ('plane', )
+    # test eval with single class dataset
+    single_class_config = dict(
+        type=DOTADataset,
+        version=angle_version,
+        ann_file='tests/data/labelTxt/',
+        img_prefix='tests/data/images/',
+        classes=('plane', ),
+        pipeline=train_pipeline)
+    single_dataset = build_dataset(single_class_config)
     fake_results = _create_dummy_results()
-    eval_results = dataset.evaluate(fake_results)
+    eval_results = single_dataset.evaluate(fake_results)
     np.testing.assert_almost_equal(eval_results['mAP'], 0.7272727)
 
     # test format_results
     tmp_filename = osp.join(tempfile.gettempdir(), 'merge_results')
     if osp.exists(tmp_filename):
         shutil.rmtree(tmp_filename)
-    dataset.format_results(fake_results, submission_dir=tmp_filename)
+    single_dataset.format_results(fake_results, submission_dir=tmp_filename)
     shutil.rmtree(tmp_filename)
 
     # test filter_empty_gt=False

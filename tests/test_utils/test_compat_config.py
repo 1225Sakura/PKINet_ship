@@ -1,4 +1,6 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+import warnings
+
 import pytest
 from mmcv import ConfigDict
 
@@ -9,10 +11,11 @@ from mmrotate.utils.compat_config import (compat_imgs_per_gpu,
 
 def test_compat_runner_args():
     cfg = ConfigDict(dict(total_epochs=12))
-    with pytest.warns(None) as record:
+    with warnings.catch_warnings(record=True) as w:
+        warnings.simplefilter("always")
         cfg = compat_runner_args(cfg)
-    assert len(record) == 1
-    assert 'runner' in record.list[0].message.args[0]
+        assert len(w) == 1
+        assert 'runner' in str(w[0].message)
     assert 'runner' in cfg
     assert cfg.runner.type == 'EpochBasedRunner'
     assert cfg.runner.max_epochs == cfg.total_epochs
