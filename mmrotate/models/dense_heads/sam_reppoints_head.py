@@ -10,13 +10,8 @@ from mmdet.core.anchor.point_generator import MlvlPointGenerator
 from mmdet.core.utils import select_single_mlvl
 from mmdet.models.dense_heads.base_dense_head import BaseDenseHead
 
-from mmrotate.core import (
-    build_assigner,
-    build_sampler,
-    multiclass_nms_rotated,
-    obb2poly,
-    poly2obb,
-)
+from mmrotate.core import (build_assigner, build_sampler,
+                           multiclass_nms_rotated, obb2poly, poly2obb)
 from ..builder import ROTATED_HEADS, build_loss
 from .utils import get_num_level_anchors_inside, points_center_pts
 
@@ -547,8 +542,8 @@ class SAMRepPointsHead(BaseDenseHead):
         sam_weights_init = sam_weights_init.reshape(-1)
         # init points loss
         pts_pred_init = pts_pred_init.reshape(-1, 2 * self.num_points)
-        pos_ind_init = (convex_weights_init
-                        > 0).nonzero(as_tuple=False).reshape(-1)
+        pos_ind_init = (convex_weights_init > 0).nonzero(
+            as_tuple=False).reshape(-1)
         pts_pred_init_norm = pts_pred_init[pos_ind_init]
         rbbox_gt_init_norm = rbbox_gt_init[pos_ind_init]
         convex_weights_pos_init = convex_weights_init[pos_ind_init]
@@ -562,8 +557,8 @@ class SAMRepPointsHead(BaseDenseHead):
         pts_pred_refine = pts_pred_refine.reshape(-1, 2 * self.num_points)
         convex_weights_refine = convex_weights_refine.reshape(-1)
         sam_weights_refine = sam_weights_refine.reshape(-1)
-        pos_ind_refine = (convex_weights_refine
-                          > 0).nonzero(as_tuple=False).reshape(-1)
+        pos_ind_refine = (convex_weights_refine > 0).nonzero(
+            as_tuple=False).reshape(-1)
         pts_pred_refine_norm = pts_pred_refine[pos_ind_refine]
         rbbox_gt_refine_norm = rbbox_gt_refine[pos_ind_refine]
         convex_weights_pos_refine = convex_weights_refine[pos_ind_refine]

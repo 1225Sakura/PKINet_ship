@@ -10,13 +10,8 @@ from mmdet.core.anchor.point_generator import MlvlPointGenerator
 from mmdet.core.utils import select_single_mlvl
 from mmdet.models.dense_heads.base_dense_head import BaseDenseHead
 
-from mmrotate.core import (
-    build_assigner,
-    build_sampler,
-    multiclass_nms_rotated,
-    obb2poly,
-    poly2obb,
-)
+from mmrotate.core import (build_assigner, build_sampler,
+                           multiclass_nms_rotated, obb2poly, poly2obb)
 from ..builder import ROTATED_HEADS, build_loss
 from .utils import convex_overlaps, levels_to_images
 
@@ -558,8 +553,8 @@ class RotatedRepPointsHead(BaseDenseHead):
             rbbox_gt_init = rbbox_gt_init.reshape(-1, 8)
             convex_weights_init = convex_weights_init.reshape(-1)
             pts_pred_init = pts_pred_init.reshape(-1, 2 * self.num_points)
-            pos_ind_init = (convex_weights_init
-                            > 0).nonzero(as_tuple=False).reshape(-1)
+            pos_ind_init = (convex_weights_init > 0).nonzero(
+                as_tuple=False).reshape(-1)
             pts_pred_init_norm = pts_pred_init[pos_ind_init]
             rbbox_gt_init_norm = rbbox_gt_init[pos_ind_init]
             convex_weights_pos_init = convex_weights_init[pos_ind_init]
@@ -572,8 +567,8 @@ class RotatedRepPointsHead(BaseDenseHead):
             convex_weights_init = convex_weights_init.reshape(-1)
             # init points loss
             pts_pred_init = pts_pred_init.reshape(-1, 2 * self.num_points)
-            pos_ind_init = (convex_weights_init
-                            > 0).nonzero(as_tuple=False).reshape(-1)
+            pos_ind_init = (convex_weights_init > 0).nonzero(
+                as_tuple=False).reshape(-1)
             pts_pred_init_norm = pts_pred_init[pos_ind_init]
             rbbox_gt_init_norm = rbbox_gt_init[pos_ind_init]
             convex_weights_pos_init = convex_weights_init[pos_ind_init]
@@ -584,8 +579,8 @@ class RotatedRepPointsHead(BaseDenseHead):
             rbbox_gt_refine = rbbox_gt_refine.reshape(-1, 8)
             pts_pred_refine = pts_pred_refine.reshape(-1, 2 * self.num_points)
             convex_weights_refine = convex_weights_refine.reshape(-1)
-            pos_ind_refine = (convex_weights_refine
-                              > 0).nonzero(as_tuple=False).reshape(-1)
+            pos_ind_refine = (convex_weights_refine > 0).nonzero(
+                as_tuple=False).reshape(-1)
             pts_pred_refine_norm = pts_pred_refine[pos_ind_refine]
             rbbox_gt_refine_norm = rbbox_gt_refine[pos_ind_refine]
             convex_weights_pos_refine = convex_weights_refine[pos_ind_refine]
@@ -1007,8 +1002,8 @@ class RotatedRepPointsHead(BaseDenseHead):
         pos_normalize_term = pos_level_mask_after_cfa * (
             self.point_base_scale *
             torch.as_tensor(self.point_strides).type_as(label)).reshape(-1, 1)
-        pos_normalize_term = pos_normalize_term[pos_normalize_term >
-                                                0].type_as(convex_weight)
+        pos_normalize_term = pos_normalize_term[
+            pos_normalize_term > 0].type_as(convex_weight)
         assert len(pos_normalize_term) == len(pos_inds_after_cfa)
 
         return label, label_weight, convex_weight, num_pos, pos_normalize_term

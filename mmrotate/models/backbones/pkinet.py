@@ -1,4 +1,7 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 import math
+from typing import Optional, Sequence, Union
+
 import torch
 import torch.nn as nn
 from mmcv.cnn import ConvModule, build_norm_layer
@@ -7,7 +10,6 @@ from mmengine.logging import MMLogger
 from mmengine.model import BaseModule, constant_init
 from mmengine.model.weight_init import normal_init, trunc_normal_init
 from torch.nn.modules.batchnorm import _BatchNorm
-from typing import Optional, Sequence, Union
 
 from mmrotate.models.builder import ROTATED_BACKBONES
 from mmrotate.models.utils import BCHW2BHWC, BHWC2BCHW, autopad, make_divisible
@@ -28,7 +30,7 @@ class GSiLU(BaseModule):
 
 
 class CAA(BaseModule):
-    """Context Anchor Attention"""
+    """Context Anchor Attention."""
 
     def __init__(
         self,
@@ -68,7 +70,7 @@ class CAA(BaseModule):
 
 
 class ConvFFN(BaseModule):
-    """Multi-layer perceptron implemented with ConvModule"""
+    """Multi-layer perceptron implemented with ConvModule."""
 
     def __init__(
         self,
@@ -127,7 +129,7 @@ class ConvFFN(BaseModule):
 
 
 class Stem(BaseModule):
-    """Stem layer"""
+    """Stem layer."""
 
     def __init__(
         self,
@@ -171,7 +173,7 @@ class Stem(BaseModule):
 
 
 class DownSamplingLayer(BaseModule):
-    """Down sampling layer"""
+    """Down sampling layer."""
 
     def __init__(
         self,
@@ -198,7 +200,7 @@ class DownSamplingLayer(BaseModule):
 
 
 class InceptionBottleneck(BaseModule):
-    """Bottleneck with Inception module"""
+    """Bottleneck with Inception module."""
 
     def __init__(
         self,
@@ -329,7 +331,7 @@ class InceptionBottleneck(BaseModule):
 
 
 class PKIBlock(BaseModule):
-    """Poly Kernel Inception Block"""
+    """Poly Kernel Inception Block."""
 
     def __init__(
         self,
@@ -419,7 +421,7 @@ class PKIBlock(BaseModule):
 
 
 class PKIStage(BaseModule):
-    """Poly Kernel Inception Stage"""
+    """Poly Kernel Inception Stage."""
 
     def __init__(
         self,
@@ -518,7 +520,7 @@ class PKIStage(BaseModule):
 
 @ROTATED_BACKBONES.register_module()
 class PKINet(BaseModule):
-    """Poly Kernel Inception Network"""
+    """Poly Kernel Inception Network."""
     arch_settings = {
         # from left to right: (indices)
         # in_channels(0), out_channels(1), num_blocks(2),

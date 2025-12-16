@@ -1,9 +1,6 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-from .bbox_heads import (
-    RotatedBBoxHead,
-    RotatedConvFCBBoxHead,
-    RotatedShared2FCBBoxHead,
-)
+from .bbox_heads import (RotatedBBoxHead, RotatedConvFCBBoxHead,
+                         RotatedShared2FCBBoxHead)
 from .gv_ratio_roi_head import GVRatioRoIHead
 from .oriented_standard_roi_head import OrientedStandardRoIHead
 from .roi_extractors import RotatedSingleRoIExtractor

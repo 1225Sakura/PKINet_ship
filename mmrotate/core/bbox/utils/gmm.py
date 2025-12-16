@@ -1,7 +1,8 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+from math import pi
+
 import numpy as np
 import torch
-from math import pi
 
 
 class GaussianMixture():

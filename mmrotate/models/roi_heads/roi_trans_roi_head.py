@@ -1,16 +1,12 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-import torch
 from abc import ABCMeta
+
+import torch
 from mmcv.runner import BaseModule, ModuleList
 from mmdet.core import bbox2roi
 
-from mmrotate.core import (
-    build_assigner,
-    build_sampler,
-    obb2xyxy,
-    rbbox2result,
-    rbbox2roi,
-)
+from mmrotate.core import (build_assigner, build_sampler, obb2xyxy,
+                           rbbox2result, rbbox2roi)
 from ..builder import ROTATED_HEADS, build_head, build_roi_extractor
 
 

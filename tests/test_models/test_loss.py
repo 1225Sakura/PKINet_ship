@@ -4,15 +4,9 @@ import pytest
 import torch
 
 from mmrotate import digit_version
-from mmrotate.models.losses import (
-    BCConvexGIoULoss,
-    ConvexGIoULoss,
-    GDLoss,
-    GDLoss_v1,
-    KFLoss,
-    KLDRepPointsLoss,
-    RotatedIoULoss,
-)
+from mmrotate.models.losses import (BCConvexGIoULoss, ConvexGIoULoss, GDLoss,
+                                    GDLoss_v1, KFLoss, KLDRepPointsLoss,
+                                    RotatedIoULoss)
 
 
 @pytest.mark.skipif(

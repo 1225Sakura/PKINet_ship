@@ -1,7 +1,8 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import glob
-import numpy as np
 import os.path as osp
+
+import numpy as np
 
 from mmrotate.core import poly2obb_np
 from .builder import ROTATED_DATASETS
@@ -10,7 +11,7 @@ from .dota import DOTADataset
 
 @ROTATED_DATASETS.register_module()
 class DOSRDataset(DOTADataset):
-    """DOSR船舶数据集，包含20个船舶类别"""
+    """DOSR船舶数据集，包含20个船舶类别."""
 
     CLASSES = ('auxiliary ship', 'barge', 'bulk cargo vessel', 'cargo',
                'communication ship', 'container', 'cruise', 'deckbarge',
@@ -25,9 +26,7 @@ class DOSRDataset(DOTADataset):
                (0, 128, 0), (128, 0, 128), (255, 20, 147), (64, 224, 208)]
 
     def load_annotations(self, ann_folder):
-        """
-        重写以处理包含空格的类别名称
-        """
+        """重写以处理包含空格的类别名称."""
         cls_map = {c: i for i, c in enumerate(self.CLASSES)}
         ann_files = glob.glob(ann_folder + '/*.txt')
         data_infos = []

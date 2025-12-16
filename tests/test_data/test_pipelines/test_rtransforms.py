@@ -1,5 +1,6 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import copy
+
 import numpy as np
 import pytest
 from mmcv.utils import build_from_cfg

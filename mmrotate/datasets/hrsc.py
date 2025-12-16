@@ -1,9 +1,10 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-import mmcv
-import numpy as np
 import os.path as osp
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
+
+import mmcv
+import numpy as np
 from mmcv import print_log
 from mmdet.datasets import CustomDataset
 from PIL import Image

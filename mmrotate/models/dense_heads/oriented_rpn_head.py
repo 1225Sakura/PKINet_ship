@@ -1,5 +1,6 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import copy
+
 import torch
 import torch.nn as nn
 from mmcv.ops import batched_nms

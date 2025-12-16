@@ -3,6 +3,7 @@
 ## 数据集准备完成
 
 ### 1. **LAFI数据集**
+
 - **位置**: `/home/user/PKINet/data/LAFI/`
 - **训练集**: 5,120 张图像
 - **验证集**: 1,280 张图像
@@ -11,6 +12,7 @@
 - **配置文件**: `configs/pkinet/pkinet-s_lafi_ship.py`
 
 ### 2. **DOTA ship-only数据集**
+
 - **位置**: `/home/user/PKINet/data/dota_ship_only/`
 - **训练集**: 326 张图像，28,068 个船舶目标
 - **验证集**: 108 张图像，8,960 个船舶目标
@@ -19,6 +21,7 @@
 - **来源**: 从DOTA v1.0数据集中筛选船舶类别
 
 ### 3. **DOSR数据集**
+
 - **位置**: `/home/user/PKINet/data/DOSR_converted/`
 - **训练集**: 523 张图像
 - **验证集**: 223 张图像
@@ -26,23 +29,27 @@
 - **配置文件**: `configs/pkinet/pkinet-s_dosr_ship.py`
 - **来源**: 从XML格式转换为DOTA格式
 
----
+______________________________________________________________________
 
 ## Conda环境设置
 
 ### 环境安装
+
 环境安装脚本已在后台运行：
+
 ```bash
 # 检查安装进度
 tail -f setup_env.log
 ```
 
 如果需要手动安装或重新安装：
+
 ```bash
 bash setup_env.sh
 ```
 
 ### 环境信息
+
 - **环境名称**: pkinet
 - **Python版本**: 3.8
 - **PyTorch版本**: 1.11.0
@@ -50,18 +57,20 @@ bash setup_env.sh
 - **依赖包**: mmcv-full, mmdet, mmengine, mmrotate
 
 ### 激活环境
+
 ```bash
 conda activate pkinet
 ```
 
 ### 验证安装
+
 ```bash
 python -c "import torch; print(f'PyTorch: {torch.__version__}')"
 python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}')"
 python -c "import mmrotate; print(f'MMRotate安装成功')"
 ```
 
----
+______________________________________________________________________
 
 ## 训练配置文件
 
@@ -72,6 +81,7 @@ python -c "import mmrotate; print(f'MMRotate安装成功')"
 3. **pkinet-s_dosr_ship.py** - DOSR数据集（2类）
 
 ### 配置参数
+
 - **Batch Size**: 2
 - **学习率**: 0.0002
 - **优化器**: AdamW
@@ -79,11 +89,12 @@ python -c "import mmrotate; print(f'MMRotate安装成功')"
 - **验证间隔**: 每3个epoch
 - **图像尺寸**: 1024x1024
 
----
+______________________________________________________________________
 
 ## 开始训练
 
 ### 方式1: 使用交互式训练脚本（推荐）
+
 ```bash
 cd /home/user/PKINet
 conda activate pkinet
@@ -91,6 +102,7 @@ conda activate pkinet
 ```
 
 这个脚本会提供以下选项：
+
 1. 仅训练 LAFI
 2. 仅训练 DOTA ship
 3. 仅训练 DOSR
@@ -100,6 +112,7 @@ conda activate pkinet
 ### 方式2: 手动启动单个训练任务
 
 #### 训练LAFI数据集
+
 ```bash
 conda activate pkinet
 python tools/train.py \
@@ -109,6 +122,7 @@ python tools/train.py \
 ```
 
 #### 训练DOTA ship数据集
+
 ```bash
 conda activate pkinet
 python tools/train.py \
@@ -118,6 +132,7 @@ python tools/train.py \
 ```
 
 #### 训练DOSR数据集
+
 ```bash
 conda activate pkinet
 python tools/train.py \
@@ -155,11 +170,12 @@ nohup python tools/train.py \
     > train_dosr.log 2>&1 &
 ```
 
----
+______________________________________________________________________
 
 ## 监控训练
 
 ### 查看训练日志
+
 ```bash
 # LAFI训练日志
 tail -f train_lafi.log
@@ -172,11 +188,13 @@ tail -f train_dosr.log
 ```
 
 ### 查看TensorBoard
+
 ```bash
 tensorboard --logdir work_dirs/
 ```
 
 ### 检查训练状态
+
 ```bash
 # 查看GPU使用情况
 nvidia-smi
@@ -185,7 +203,7 @@ nvidia-smi
 ps aux | grep train.py
 ```
 
----
+______________________________________________________________________
 
 ## 训练输出
 
@@ -196,12 +214,13 @@ ps aux | grep train.py
 - **DOSR**: `work_dirs/pkinet-s_dosr_ship/`
 
 每个目录包含：
+
 - `*.pth` - 模型权重文件
 - `*.log.json` - 训练日志
 - `*.py` - 配置文件副本
 - `tf_logs/` - TensorBoard日志
 
----
+______________________________________________________________________
 
 ## 预训练权重（可选）
 
@@ -210,7 +229,7 @@ ps aux | grep train.py
 - **PKINet-T**: [下载链接](https://1drv.ms/u/c/9ce9a57f1a400a74/EXQKQBp_pekggJxvAAAAAAABWyCuNnKnuiA47qX6Wr7TMQ?e=pWhU1h)
 - **PKINet-S**: [下载链接](https://1drv.ms/u/c/9ce9a57f1a400a74/EXQKQBp_pekggJxrAAAAAAAB46whGHAZkAw-Pnkwgc_OWQ?e=n0NrZl)
 
----
+______________________________________________________________________
 
 ## 测试和推理
 
@@ -223,12 +242,14 @@ python tools/test.py \
     --eval mAP
 ```
 
----
+______________________________________________________________________
 
 ## 常见问题
 
 ### 1. CUDA Out of Memory
+
 降低batch size或图像尺寸：
+
 ```python
 # 在配置文件中修改
 bs = 1  # 降低batch size
@@ -236,6 +257,7 @@ dict(type='RResize', img_scale=(512, 512))  # 降低图像尺寸
 ```
 
 ### 2. 查看数据集统计
+
 ```bash
 # LAFI
 ls data/LAFI/train/annfiles | wc -l
@@ -251,13 +273,15 @@ ls data/DOSR_converted/val/annfiles | wc -l
 ```
 
 ### 3. 环境问题
+
 如果遇到导入错误，重新安装环境：
+
 ```bash
 conda env remove -n pkinet
 bash setup_env.sh
 ```
 
----
+______________________________________________________________________
 
 ## 文件结构
 
@@ -282,7 +306,7 @@ bash setup_env.sh
 └── README_TRAINING.md             # 本文档
 ```
 
----
+______________________________________________________________________
 
 ## 联系和支持
 
@@ -290,6 +314,6 @@ bash setup_env.sh
 - **代码仓库**: 当前PKINet项目
 - **MMRotate文档**: [https://mmrotate.readthedocs.io/](https://mmrotate.readthedocs.io/)
 
----
+______________________________________________________________________
 
 祝训练顺利！ 🚢

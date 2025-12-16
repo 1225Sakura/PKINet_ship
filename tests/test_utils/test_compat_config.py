@@ -1,19 +1,18 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-import pytest
 import warnings
+
+import pytest
 from mmcv import ConfigDict
 
-from mmrotate.utils.compat_config import (
-    compat_imgs_per_gpu,
-    compat_loader_args,
-    compat_runner_args,
-)
+from mmrotate.utils.compat_config import (compat_imgs_per_gpu,
+                                          compat_loader_args,
+                                          compat_runner_args)
 
 
 def test_compat_runner_args():
     cfg = ConfigDict(dict(total_epochs=12))
     with warnings.catch_warnings(record=True) as w:
-        warnings.simplefilter("always")
+        warnings.simplefilter('always')
         cfg = compat_runner_args(cfg)
         assert len(w) == 1
         assert 'runner' in str(w[0].message)

@@ -1,5 +1,6 @@
 # Copyright (c) SJTU. All rights reserved.
 import warnings
+
 from mmcv.runner import ModuleList
 
 from mmrotate.core import rbbox2result

@@ -5,7 +5,7 @@ from .dota import DOTADataset
 
 @ROTATED_DATASETS.register_module()
 class LAFIDataset(DOTADataset):
-    """LAFI船舶数据集，包含49个船舶类别"""
+    """LAFI船舶数据集，包含49个船舶类别."""
 
     CLASSES = ('AOE', 'Arleigh_Burke_DD', 'Asagiri_DD', 'Atago_DD',
                'Austin_LL', 'Barge', 'Cargo', 'Commander', 'Container_Ship',

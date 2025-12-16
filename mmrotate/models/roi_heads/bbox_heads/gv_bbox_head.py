@@ -8,12 +8,8 @@ from mmdet.core import multi_apply
 from mmdet.models.losses import accuracy
 from mmdet.models.utils import build_linear_layer
 
-from mmrotate.core import (
-    build_bbox_coder,
-    hbb2obb,
-    multiclass_nms_rotated,
-    obb2xyxy,
-)
+from mmrotate.core import (build_bbox_coder, hbb2obb, multiclass_nms_rotated,
+                           obb2xyxy)
 from ...builder import ROTATED_HEADS, build_loss
 
 

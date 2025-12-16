@@ -7,18 +7,21 @@ This directory contains training configurations for ship detection using PKINet.
 ### Ship Detection Configs (in `pkinet/` directory)
 
 1. **pkinet-s_lafi_ship.py**
+
    - Dataset: LAFI
    - Classes: 49 fine-grained ship types
    - Best mAP: 26.79%
    - Model: `work_dirs/pkinet-s_lafi_ship/epoch_8.pth`
 
 2. **pkinet-s_dota_ship.py**
+
    - Dataset: DOTA Ship-only
    - Classes: 1 (ship)
    - Best mAP: 43.04%
    - Model: `work_dirs/pkinet-s_dota_ship/epoch_30.pth`
 
 3. **pkinet-s_dosr_ship.py**
+
    - Dataset: DOSR
    - Classes: 20 ship types
    - Best mAP: 51.23%
@@ -27,6 +30,7 @@ This directory contains training configurations for ship detection using PKINet.
 ## Usage
 
 ### Training
+
 ```bash
 # Train on DOSR dataset (best performance)
 python tools/train.py configs/pkinet/pkinet-s_dosr_ship.py --work-dir work_dirs/pkinet-s_dosr_ship --gpu-ids 0
@@ -39,6 +43,7 @@ python tools/train.py configs/pkinet/pkinet-s_lafi_ship.py --work-dir work_dirs/
 ```
 
 ### Testing
+
 ```bash
 # Test and evaluate
 python tools/test.py configs/pkinet/pkinet-s_dosr_ship.py work_dirs/pkinet-s_dosr_ship/epoch_30.pth --eval mAP
@@ -50,6 +55,7 @@ python tools/test.py configs/pkinet/pkinet-s_dosr_ship.py work_dirs/pkinet-s_dos
 ## Configuration Parameters
 
 All ship detection configs use:
+
 - **Backbone**: PKINet-S (pretrained on ImageNet)
 - **Neck**: FPN
 - **Head**: Oriented R-CNN
@@ -64,6 +70,7 @@ All ship detection configs use:
 Other model configurations in this directory are part of the original MMRotate framework and have been preserved for reference. They are not actively used in this ship detection project.
 
 To explore other MMRotate models, see:
+
 - [MMRotate Model Zoo](https://mmrotate.readthedocs.io/en/latest/model_zoo.html)
 - Other config directories (cfa, convnext, oriented_rcnn, etc.)
 

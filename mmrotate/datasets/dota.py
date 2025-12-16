@@ -1,17 +1,18 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import glob
-import mmcv
-import numpy as np
 import os
 import os.path as osp
 import re
 import tempfile
 import time
-import torch
 import warnings
 import zipfile
 from collections import defaultdict
 from functools import partial
+
+import mmcv
+import numpy as np
+import torch
 from mmcv.ops import nms_rotated
 from mmdet.datasets.custom import CustomDataset
 
@@ -59,10 +60,9 @@ class DOTADataset(CustomDataset):
             Args:
                 ann_folder: folder that contains DOTA v1 annotations txt files
         """
-        cls_map = {
-            c: i
-            for i, c in enumerate(self.CLASSES)
-        }  # in mmdet v2.0 label is 0-based
+        cls_map = {c: i
+                   for i, c in enumerate(self.CLASSES)
+                   }  # in mmdet v2.0 label is 0-based
         ann_files = glob.glob(ann_folder + '/*.txt')
         data_infos = []
         if not ann_files:  # test phase

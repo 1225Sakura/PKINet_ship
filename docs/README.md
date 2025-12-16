@@ -12,6 +12,7 @@ This repository focuses on ship detection using PKINet. For detailed documentati
 ## Configuration Files
 
 All training configurations are in `configs/pkinet/`:
+
 - `pkinet-s_lafi_ship.py` - LAFI dataset (49 ship classes)
 - `pkinet-s_dota_ship.py` - DOTA Ship dataset (1 class)
 - `pkinet-s_dosr_ship.py` - DOSR dataset (20 ship classes)
@@ -19,17 +20,20 @@ All training configurations are in `configs/pkinet/`:
 ## MMRotate Framework Documentation
 
 For detailed documentation about the underlying MMRotate framework, please visit:
+
 - [MMRotate Official Documentation](https://mmrotate.readthedocs.io/)
 - Original MMRotate documentation (backup): `docs_mmrotate_backup/`
 
 ## Quick Links
 
 ### Installation
+
 ```bash
 bash quick_install.sh
 ```
 
 ### Training
+
 ```bash
 # Train all datasets
 bash train_all_datasets.sh
@@ -39,6 +43,7 @@ python tools/train.py configs/pkinet/pkinet-s_dosr_ship.py --work-dir work_dirs/
 ```
 
 ### Testing
+
 ```bash
 python tools/test.py configs/pkinet/pkinet-s_dosr_ship.py work_dirs/pkinet-s_dosr_ship/epoch_30.pth --eval mAP
 ```

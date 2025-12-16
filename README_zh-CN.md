@@ -7,6 +7,7 @@
 本仓库使用 [PKINet (Poly Kernel Inception Network)](https://openaccess.thecvf.com/content/CVPR2024/papers/Cai_Poly_Kernel_Inception_Network_for_Remote_Sensing_Detection_CVPR_2024_paper.pdf) 实现**船舶检测**任务。PKINet 是专为遥感图像设计的旋转目标检测框架，发表于 CVPR 2024。
 
 我们在三个不同的船舶检测数据集上微调了 PKINet-S 模型：
+
 - **LAFI**：49个细粒度船舶类别
 - **DOTA Ship-only**：从 DOTA v1.0 提取的单一船舶类别
 - **DOSR**：20种船舶类型（包括货船、油轮、潜艇等）
@@ -15,15 +16,16 @@
 
 ### 性能总结
 
-| 数据集     | 类别数 | 训练图像数 | 最佳mAP | 配置文件 |
-|-------------|---------|--------------|----------|--------|
-| **DOSR**    | 20      | 523          | **51.23%** | [config](./configs/pkinet/pkinet-s_dosr_ship.py) |
-| **DOTA Ship** | 1     | 326          | **43.04%** | [config](./configs/pkinet/pkinet-s_dota_ship.py) |
-| **LAFI**    | 49      | 5,120        | **26.79%** | [config](./configs/pkinet/pkinet-s_lafi_ship.py) |
+| 数据集        | 类别数 | 训练图像数 | 最佳mAP    | 配置文件                                         |
+| ------------- | ------ | ---------- | ---------- | ------------------------------------------------ |
+| **DOSR**      | 20     | 523        | **51.23%** | [config](./configs/pkinet/pkinet-s_dosr_ship.py) |
+| **DOTA Ship** | 1      | 326        | **43.04%** | [config](./configs/pkinet/pkinet-s_dota_ship.py) |
+| **LAFI**      | 49     | 5,120      | **26.79%** | [config](./configs/pkinet/pkinet-s_lafi_ship.py) |
 
 ### 详细结果
 
 #### 1. DOSR 数据集（20个船舶类别）
+
 - **最佳mAP**：51.23%（第27轮）
 - **训练集**：523张图像，训练30轮
 - **验证集**：223张图像
@@ -31,6 +33,7 @@
 - **类别**：tanker、cargo、submarine、aircraft carrier、destroyer 等
 
 #### 2. DOTA Ship 数据集（单一类别）
+
 - **最佳mAP**：43.04%（第27轮）
 - **训练集**：326张图像，包含28,068个船舶实例
 - **验证集**：108张图像，包含8,960个船舶实例
@@ -38,6 +41,7 @@
 - **类别**：ship（通用船舶）
 
 #### 3. LAFI 数据集（49个细粒度船舶类别）
+
 - **最佳mAP**：26.79%（第6轮）
 - **训练集**：5,120张图像
 - **验证集**：1,280张图像
@@ -53,13 +57,17 @@
 百度网盘分享包含两个文件夹：
 
 #### 📁 数据集文件夹
+
 包含三个船舶检测数据集：
+
 - `LAFI_dataset.tar.gz` (850MB) - 49个细粒度船舶类别，5,120训练图像 + 1,280验证图像
 - `dota_ship_only_dataset.tar.gz` (710MB) - 单一船舶类别，326训练图像 + 108验证图像
 - `DOSR_converted_dataset.tar.gz` (585MB) - 20种船舶类型，523训练图像 + 223验证图像
 
 #### 📁 模型文件夹
+
 包含预训练权重和训练好的模型：
+
 - `pkinet_s_pretrain.pth` - ImageNet预训练的PKINet-S主干网络
 - `work_dirs/` - 三个数据集的训练模型：
   - `pkinet-s_lafi_ship/` - 最佳mAP: 26.79%（第6轮）
@@ -69,6 +77,7 @@
 #### 安装步骤
 
 1. 从百度网盘下载数据集并解压到 `data/` 目录：
+
 ```bash
 tar -xzf LAFI_dataset.tar.gz -C data/
 tar -xzf dota_ship_only_dataset.tar.gz -C data/
@@ -76,6 +85,7 @@ tar -xzf DOSR_converted_dataset.tar.gz -C data/
 ```
 
 2. 下载预训练主干网络并放置到 `checkpoints/` 目录：
+
 ```bash
 mkdir -p checkpoints
 # 将 pkinet_s_pretrain.pth 移动到 checkpoints/
@@ -83,6 +93,7 @@ mv pkinet_s_pretrain.pth checkpoints/
 ```
 
 3. （可选）下载训练好的模型并放置到 `work_dirs/`：
+
 ```bash
 # 从百度网盘解压 work_dirs 文件夹
 # 包含所有训练好的模型权重
@@ -91,12 +102,14 @@ mv pkinet_s_pretrain.pth checkpoints/
 ### 数据集详情
 
 ### 1. LAFI 数据集
+
 - **位置**：`data/LAFI/`
 - **训练集**：5,120张图像
 - **验证集**：1,280张图像
 - **类别数**：49个细粒度船舶类型
 
 ### 2. DOTA Ship-only 数据集
+
 - **位置**：`data/dota_ship_only/`
 - **训练集**：326张图像，28,068个船舶实例
 - **验证集**：108张图像，8,960个船舶实例
@@ -104,6 +117,7 @@ mv pkinet_s_pretrain.pth checkpoints/
 - **来源**：从 DOTA v1.0 数据集筛选得到
 
 ### 3. DOSR 数据集
+
 - **位置**：`data/DOSR_converted/`
 - **训练集**：523张图像
 - **验证集**：223张图像
@@ -113,12 +127,15 @@ mv pkinet_s_pretrain.pth checkpoints/
 ## 安装
 
 ### 快速安装
+
 我们提供了快速安装脚本：
+
 ```bash
 bash quick_install.sh
 ```
 
 ### 手动安装
+
 本项目依赖 [PyTorch](https://pytorch.org/)、[MMCV](https://github.com/open-mmlab/mmcv)、[MMDetection](https://github.com/open-mmlab/mmdetection) 和 [MMRotate](https://github.com/open-mmlab/mmrotate)。
 
 ```bash
@@ -144,12 +161,15 @@ mim install -v -e .
 ## 训练
 
 ### 训练所有数据集
+
 使用交互式训练脚本：
+
 ```bash
 bash train_all_datasets.sh
 ```
 
 ### 训练单个数据集
+
 ```bash
 # 训练 DOSR 数据集
 python tools/train.py configs/pkinet/pkinet-s_dosr_ship.py --work-dir work_dirs/pkinet-s_dosr_ship --gpu-ids 0
@@ -164,6 +184,7 @@ python tools/train.py configs/pkinet/pkinet-s_lafi_ship.py --work-dir work_dirs/
 ## 测试和推理
 
 ### 在验证集上测试
+
 ```bash
 python tools/test.py \
     configs/pkinet/pkinet-s_dosr_ship.py \
@@ -172,6 +193,7 @@ python tools/test.py \
 ```
 
 ### 可视化结果
+
 ```bash
 python tools/test.py \
     configs/pkinet/pkinet-s_dosr_ship.py \
@@ -180,7 +202,9 @@ python tools/test.py \
 ```
 
 ### 生成预测结果
+
 为所有三个数据集生成预测结果：
+
 ```bash
 bash generate_all_predictions.sh
 ```
@@ -227,6 +251,7 @@ PKINet/
 ## 致谢
 
 本项目基于以下工作：
+
 - **PKINet**：[Poly Kernel Inception Network for Remote Sensing Detection (CVPR 2024)](https://openaccess.thecvf.com/content/CVPR2024/papers/Cai_Poly_Kernel_Inception_Network_for_Remote_Sensing_Detection_CVPR_2024_paper.pdf)
 - **MMRotate**：[OpenMMLab 旋转目标检测工具箱](https://github.com/open-mmlab/mmrotate)
 - **DOTA**：[A Large-scale Dataset for Object Detection in Aerial Images](https://captain-whu.github.io/DOTA/index.html)
