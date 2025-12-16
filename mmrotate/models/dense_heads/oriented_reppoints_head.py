@@ -1,6 +1,5 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import math
-
 import numpy as np
 import torch
 import torch.nn as nn
@@ -12,8 +11,13 @@ from mmdet.core.anchor.point_generator import MlvlPointGenerator
 from mmdet.core.utils import select_single_mlvl
 from mmdet.models.dense_heads.base_dense_head import BaseDenseHead
 
-from mmrotate.core import (build_assigner, build_sampler,
-                           multiclass_nms_rotated, obb2poly, poly2obb)
+from mmrotate.core import (
+    build_assigner,
+    build_sampler,
+    multiclass_nms_rotated,
+    obb2poly,
+    poly2obb,
+)
 from ..builder import ROTATED_HEADS, build_loss
 from .utils import levels_to_images
 
@@ -612,8 +616,8 @@ class OrientedRepPointsHead(BaseDenseHead):
         pos_normalize_term = pos_level_mask_after_select * (
             self.point_base_scale *
             torch.as_tensor(self.point_strides).type_as(label)).reshape(-1, 1)
-        pos_normalize_term = pos_normalize_term[
-            pos_normalize_term > 0].type_as(bbox_weight)
+        pos_normalize_term = pos_normalize_term[pos_normalize_term >
+                                                0].type_as(bbox_weight)
         assert len(pos_normalize_term) == len(pos_inds_after_select)
 
         return label, label_weight, bbox_weight, num_pos, pos_normalize_term
@@ -626,8 +630,8 @@ class OrientedRepPointsHead(BaseDenseHead):
         bbox_gt_init = bbox_gt_init.reshape(-1, 8)
         bbox_weights_init = bbox_weights_init.reshape(-1)
         pts_pred_init = pts_pred_init.reshape(-1, 2 * self.num_points)
-        pos_ind_init = (bbox_weights_init > 0).nonzero(
-            as_tuple=False).reshape(-1)
+        pos_ind_init = (bbox_weights_init
+                        > 0).nonzero(as_tuple=False).reshape(-1)
 
         pts_pred_init_norm = pts_pred_init[pos_ind_init]
         bbox_gt_init_norm = bbox_gt_init[pos_ind_init]

@@ -1,31 +1,28 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import glob
-import os.path as osp
 import numpy as np
-from .dota import DOTADataset
-from .builder import ROTATED_DATASETS
+import os.path as osp
+
 from mmrotate.core import poly2obb_np
+from .builder import ROTATED_DATASETS
+from .dota import DOTADataset
 
 
 @ROTATED_DATASETS.register_module()
 class DOSRDataset(DOTADataset):
     """DOSR船舶数据集，包含20个船舶类别"""
 
-    CLASSES = (
-        'auxiliary ship', 'barge', 'bulk cargo vessel', 'cargo',
-        'communication ship', 'container', 'cruise', 'deckbarge',
-        'deckship', 'fishing boat', 'flat traffic ship', 'floating crane',
-        'military_ship', 'multihull', 'speedboat', 'submarine',
-        'tanker', 'transpot', 'tug', 'yacht'
-    )
+    CLASSES = ('auxiliary ship', 'barge', 'bulk cargo vessel', 'cargo',
+               'communication ship', 'container', 'cruise', 'deckbarge',
+               'deckship', 'fishing boat', 'flat traffic ship',
+               'floating crane', 'military_ship', 'multihull', 'speedboat',
+               'submarine', 'tanker', 'transpot', 'tug', 'yacht')
 
-    PALETTE = [
-        (165, 42, 42), (189, 183, 107), (0, 255, 0), (255, 0, 0),
-        (138, 43, 226), (255, 128, 0), (255, 0, 255), (0, 255, 255),
-        (255, 193, 193), (0, 51, 153), (255, 250, 205), (0, 139, 139),
-        (255, 255, 0), (147, 116, 116), (0, 0, 255), (255, 165, 0),
-        (0, 128, 0), (128, 0, 128), (255, 20, 147), (64, 224, 208)
-    ]
+    PALETTE = [(165, 42, 42), (189, 183, 107), (0, 255, 0), (255, 0, 0),
+               (138, 43, 226), (255, 128, 0), (255, 0, 255), (0, 255, 255),
+               (255, 193, 193), (0, 51, 153), (255, 250, 205), (0, 139, 139),
+               (255, 255, 0), (147, 116, 116), (0, 0, 255), (255, 165, 0),
+               (0, 128, 0), (128, 0, 128), (255, 20, 147), (64, 224, 208)]
 
     def load_annotations(self, ann_folder):
         """
@@ -60,7 +57,7 @@ class DOSRDataset(DOTADataset):
                     poly = np.array(bbox_info[:8], dtype=np.float32)
                     try:
                         x, y, w, h, a = poly2obb_np(poly, self.version)
-                    except:
+                    except Exception:  # noqa: E722
                         continue
                     # difficulty is always the last field
                     difficulty = int(bbox_info[-1])
@@ -86,8 +83,7 @@ class DOSRDataset(DOTADataset):
                 data_info['ann']['polygons'] = np.array(
                     gt_polygons, dtype=np.float32)
             else:
-                data_info['ann']['bboxes'] = np.zeros((0, 5),
-                                                      dtype=np.float32)
+                data_info['ann']['bboxes'] = np.zeros((0, 5), dtype=np.float32)
                 data_info['ann']['labels'] = np.array([], dtype=np.int64)
                 data_info['ann']['polygons'] = np.zeros((0, 8),
                                                         dtype=np.float32)

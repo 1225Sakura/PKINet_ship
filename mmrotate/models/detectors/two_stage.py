@@ -1,7 +1,6 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-import warnings
-
 import torch
+import warnings
 
 from ..builder import ROTATED_DETECTORS, build_backbone, build_head, build_neck
 from .base import RotatedBaseDetector

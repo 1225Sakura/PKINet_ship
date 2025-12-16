@@ -1,6 +1,5 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import math
-
 import torch
 from mmdet.core.bbox.coder.base_bbox_coder import BaseBBoxCoder
 

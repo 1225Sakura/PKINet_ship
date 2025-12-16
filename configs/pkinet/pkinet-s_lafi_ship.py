@@ -1,5 +1,6 @@
 _base_ = [
-    '../_base_/default_runtime.py', '../_base_/schedules/schedule_30e.py',
+    '../_base_/default_runtime.py',
+    '../_base_/schedules/schedule_30e.py',
 ]
 
 project_dir = 'pkinet-s_lafi_ship'
@@ -32,7 +33,8 @@ model = dict(
         out_indices=(1, 2, 3, 4),
         norm_cfg=dict(type='BN', requires_grad=True),
         act_cfg=dict(type='SiLU'),
-        init_cfg=dict(type='Pretrained', prefix='backbone.', checkpoint=checkpoint),
+        init_cfg=dict(
+            type='Pretrained', prefix='backbone.', checkpoint=checkpoint),
     ),
     neck=dict(
         type='FPN',
@@ -54,8 +56,10 @@ model = dict(
             angle_range=angle_version,
             target_means=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
             target_stds=[1.0, 1.0, 1.0, 1.0, 0.5, 0.5]),
-        loss_cls=dict(type='CrossEntropyLoss', use_sigmoid=True, loss_weight=1.0),
-        loss_bbox=dict(type='SmoothL1Loss', beta=0.1111111111111111, loss_weight=1.0)),
+        loss_cls=dict(
+            type='CrossEntropyLoss', use_sigmoid=True, loss_weight=1.0),
+        loss_bbox=dict(
+            type='SmoothL1Loss', beta=0.1111111111111111, loss_weight=1.0)),
     roi_head=dict(
         type='OrientedStandardRoIHead',
         bbox_roi_extractor=dict(
@@ -82,7 +86,8 @@ model = dict(
                 target_means=(.0, .0, .0, .0, .0),
                 target_stds=(0.1, 0.1, 0.2, 0.2, 0.1)),
             reg_class_agnostic=True,
-            loss_cls=dict(type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0),
+            loss_cls=dict(
+                type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0),
             loss_bbox=dict(type='SmoothL1Loss', beta=1.0, loss_weight=1.0))),
     train_cfg=dict(
         rpn=dict(
@@ -203,7 +208,8 @@ optimizer = dict(
     lr=base_lr,
     betas=(0.9, 0.999),
     weight_decay=0.05,
-    paramwise_cfg=dict(norm_decay_mult=0, bias_decay_mult=0, bypass_duplicate=True),
+    paramwise_cfg=dict(
+        norm_decay_mult=0, bias_decay_mult=0, bypass_duplicate=True),
 )
 
 # evaluation

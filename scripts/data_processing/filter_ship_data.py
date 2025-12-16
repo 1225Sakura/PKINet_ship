@@ -3,17 +3,16 @@
 筛选DOTA数据集中仅包含船舶（ship）类别的数据
 """
 
-import os
 import shutil
 from pathlib import Path
+
 from tqdm import tqdm
 
-def filter_ship_from_dota(
-    dota_base_dir,
-    output_dir,
-    split='train',
-    target_class='ship'
-):
+
+def filter_ship_from_dota(dota_base_dir,
+                          output_dir,
+                          split='train',
+                          target_class='ship'):
     """
     从DOTA数据集中筛选指定类别的数据
 
@@ -88,14 +87,15 @@ def filter_ship_from_dota(
 
 def main():
     # DOTA数据集路径
-    dota_base_dir = '/home/user/dinov3/remote_sensing_segmentation/datasets/DOTA'
+    dota_base_dir = ('/home/user/dinov3/remote_sensing_segmentation/'
+                     'datasets/DOTA')
 
     # 输出目录
     output_dir = '/home/user/PKINet/data/dota_ship_only'
 
-    print("="*50)
+    print("=" * 50)
     print("开始筛选DOTA数据集中的船舶数据")
-    print("="*50)
+    print("=" * 50)
 
     # 首先检查图像是否已解压
     train_image_dir = Path(dota_base_dir) / 'train' / 'images' / '1'
@@ -104,10 +104,11 @@ def main():
         print("请先解压图像文件!")
 
         # 尝试解压part1.zip
-        part1_zip = Path(dota_base_dir) / 'train' / 'images' / '1' / 'part1.zip'
+        part1_zip = Path(
+            dota_base_dir) / 'train' / 'images' / '1' / 'part1.zip'
         parent_dir = part1_zip.parent
         if parent_dir.exists():
-            print(f"\n正在解压训练集图像...")
+            print("\n正在解压训练集图像...")
             import zipfile
 
             # 找到所有zip文件
@@ -120,23 +121,15 @@ def main():
 
     # 处理训练集
     train_files, train_ships = filter_ship_from_dota(
-        dota_base_dir,
-        output_dir,
-        split='train',
-        target_class='ship'
-    )
+        dota_base_dir, output_dir, split='train', target_class='ship')
 
     # 处理验证集
     val_files, val_ships = filter_ship_from_dota(
-        dota_base_dir,
-        output_dir,
-        split='val',
-        target_class='ship'
-    )
+        dota_base_dir, output_dir, split='val', target_class='ship')
 
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     print("筛选完成!")
-    print("="*50)
+    print("=" * 50)
     print(f"训练集: {train_files} 个文件, {train_ships} 个船舶")
     print(f"验证集: {val_files} 个文件, {val_ships} 个船舶")
     print(f"总计: {train_files + val_files} 个文件, {train_ships + val_ships} 个船舶")

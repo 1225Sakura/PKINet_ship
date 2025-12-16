@@ -3,11 +3,12 @@
 将DOSR数据集的XML标注转换为DOTA格式的txt文件
 """
 
-import os
+import shutil
 import xml.etree.ElementTree as ET
 from pathlib import Path
+
 from tqdm import tqdm
-import shutil
+
 
 def convert_xml_to_dota(xml_file):
     """
@@ -77,7 +78,8 @@ def convert_dosr_dataset(dosr_dir, output_dir):
         # 转换每个文件
         for file_name in tqdm(file_names, desc=f"转换{split}"):
             # 转换XML到txt
-            xml_file = dosr_dir / 'Annotations_8_parameters_version' / f'{file_name}.xml'
+            xml_file = (dosr_dir / 'Annotations_8_parameters_version' /
+                        f'{file_name}.xml')
 
             if not xml_file.exists():
                 print(f"  警告: {xml_file} 不存在")
@@ -86,10 +88,7 @@ def convert_dosr_dataset(dosr_dir, output_dir):
             annotations = convert_xml_to_dota(xml_file)
 
             # 添加元数据
-            metadata = [
-                "imagesource:DOSR\n",
-                "gsd:0.5\n"
-            ]
+            metadata = ["imagesource:DOSR\n", "gsd:0.5\n"]
 
             # 保存txt文件
             txt_file = output_annfiles / f'{file_name}.txt'
@@ -114,15 +113,15 @@ def main():
     dosr_dir = '/home/user/PKINet/data/DOSR'
     output_dir = '/home/user/PKINet/data/DOSR_converted'
 
-    print("="*60)
+    print("=" * 60)
     print("转换DOSR数据集为DOTA格式")
-    print("="*60)
+    print("=" * 60)
 
     convert_dosr_dataset(dosr_dir, output_dir)
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("转换完成!")
-    print("="*60)
+    print("=" * 60)
     print(f"输出目录: {output_dir}")
 
     # 最终统计
@@ -131,7 +130,7 @@ def main():
     val_ann = len(list(Path(output_dir).glob('val/annfiles/*.txt')))
     val_img = len(list(Path(output_dir).glob('val/images/*.png')))
 
-    print(f"\n最终统计:")
+    print("\n最终统计:")
     print(f"  训练集: {train_ann} 个标注, {train_img} 个图像")
     print(f"  验证集: {val_ann} 个标注, {val_img} 个图像")
 

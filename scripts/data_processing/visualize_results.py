@@ -1,15 +1,18 @@
 #!/usr/bin/env python
 """可视化三个数据集的预测结果"""
 import os
-import sys
-import mmcv
-from mmcv import Config
-from mmdet.apis import init_detector, inference_detector
-from mmrotate.core import imshow_det_rbboxes
-import numpy as np
 import random
 
-def visualize_dataset(config_file, checkpoint_file, data_root, img_prefix, output_dir, num_samples=10):
+import mmcv
+from mmdet.apis import inference_detector, init_detector
+
+
+def visualize_dataset(config_file,
+                      checkpoint_file,
+                      data_root,
+                      img_prefix,
+                      output_dir,
+                      num_samples=10):
     """
     可视化数据集的预测结果
 
@@ -44,21 +47,14 @@ def visualize_dataset(config_file, checkpoint_file, data_root, img_prefix, outpu
         # 可视化
         img = mmcv.imread(img_path)
 
-        # 获取类别名称
-        class_names = model.CLASSES
-
         # 可视化检测结果
         out_file = os.path.join(output_dir, f'result_{idx:03d}_{img_file}')
-        model.show_result(
-            img,
-            result,
-            score_thr=0.3,
-            out_file=out_file
-        )
+        model.show_result(img, result, score_thr=0.3, out_file=out_file)
 
         print(f"  [{idx+1}/{len(sample_files)}] 保存结果到: {out_file}")
 
     print(f"完成! 结果保存在: {output_dir}")
+
 
 if __name__ == '__main__':
     # 配置
@@ -100,8 +96,7 @@ if __name__ == '__main__':
                 None,
                 config['img_prefix'],
                 config['output_dir'],
-                num_samples=10
-            )
+                num_samples=10)
         except Exception as e:
             print(f"错误: {e}")
             import traceback

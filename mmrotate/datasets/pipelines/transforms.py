@@ -1,13 +1,16 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import copy
-
 import cv2
 import mmcv
 import numpy as np
 import torch
 from mmcv.ops import box_iou_rotated
-from mmdet.datasets.pipelines.transforms import (Mosaic, RandomCrop,
-                                                 RandomFlip, Resize)
+from mmdet.datasets.pipelines.transforms import (
+    Mosaic,
+    RandomCrop,
+    RandomFlip,
+    Resize,
+)
 from numpy import random
 
 from mmrotate.core import norm_angle, obb2poly_np, poly2obb_np

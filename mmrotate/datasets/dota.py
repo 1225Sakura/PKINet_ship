@@ -1,18 +1,17 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import glob
+import mmcv
+import numpy as np
 import os
 import os.path as osp
 import re
 import tempfile
 import time
+import torch
 import warnings
 import zipfile
 from collections import defaultdict
 from functools import partial
-
-import mmcv
-import numpy as np
-import torch
 from mmcv.ops import nms_rotated
 from mmdet.datasets.custom import CustomDataset
 
@@ -60,9 +59,10 @@ class DOTADataset(CustomDataset):
             Args:
                 ann_folder: folder that contains DOTA v1 annotations txt files
         """
-        cls_map = {c: i
-                   for i, c in enumerate(self.CLASSES)
-                   }  # in mmdet v2.0 label is 0-based
+        cls_map = {
+            c: i
+            for i, c in enumerate(self.CLASSES)
+        }  # in mmdet v2.0 label is 0-based
         ann_files = glob.glob(ann_folder + '/*.txt')
         data_infos = []
         if not ann_files:  # test phase
@@ -417,8 +417,7 @@ class DOTAv2Dataset(DOTADataset):
                'container-crane', 'airport', 'helipad')
 
     PALETTE = [(165, 42, 42), (189, 183, 107), (0, 255, 0), (255, 0, 0),
-               (138, 43, 226), (255, 128, 0), (255, 0, 255),
-               (0, 255, 255), (255, 193, 193), (0, 51, 153),
-               (255, 250, 205), (0, 139, 139), (255, 255, 0),
-               (147, 116, 116), (0, 0, 255), (220, 20, 60), (119, 11, 32),
-               (0, 0, 142)]
+               (138, 43, 226), (255, 128, 0), (255, 0, 255), (0, 255, 255),
+               (255, 193, 193), (0, 51, 153), (255, 250, 205), (0, 139, 139),
+               (255, 255, 0), (147, 116, 116), (0, 0, 255), (220, 20, 60),
+               (119, 11, 32), (0, 0, 142)]

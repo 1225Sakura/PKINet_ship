@@ -1,17 +1,22 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-from inspect import signature
-
 import torch
 import torch.nn as nn
+from inspect import signature
 from mmcv.runner import force_fp32
 from mmdet.core import images_to_levels, multi_apply, unmap
 from mmdet.models.dense_heads.base_dense_head import BaseDenseHead
 
-from mmrotate.core import (aug_multiclass_nms_rotated, bbox_mapping_back,
-                           build_assigner, build_bbox_coder,
-                           build_prior_generator, build_sampler,
-                           multiclass_nms_rotated, obb2hbb,
-                           rotated_anchor_inside_flags)
+from mmrotate.core import (
+    aug_multiclass_nms_rotated,
+    bbox_mapping_back,
+    build_assigner,
+    build_bbox_coder,
+    build_prior_generator,
+    build_sampler,
+    multiclass_nms_rotated,
+    obb2hbb,
+    rotated_anchor_inside_flags,
+)
 from ..builder import ROTATED_HEADS, build_loss
 
 

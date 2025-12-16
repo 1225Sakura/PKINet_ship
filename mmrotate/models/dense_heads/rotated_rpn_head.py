@@ -1,13 +1,16 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import copy
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from mmcv.ops import batched_nms
 from mmcv.runner import force_fp32
-from mmdet.core import (anchor_inside_flags, images_to_levels, multi_apply,
-                        unmap)
+from mmdet.core import (
+    anchor_inside_flags,
+    images_to_levels,
+    multi_apply,
+    unmap,
+)
 from mmdet.models.dense_heads.anchor_head import AnchorHead
 
 from mmrotate.core import obb2xyxy

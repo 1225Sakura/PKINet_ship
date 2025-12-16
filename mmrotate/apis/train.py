@@ -1,16 +1,28 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 # Copied from mmdet, only modified `get_root_logger`.
 import os
-
-from mmcv.runner import (DistSamplerSeedHook, EpochBasedRunner,
-                         Fp16OptimizerHook, OptimizerHook, build_optimizer,
-                         build_runner)
+from mmcv.runner import (
+    DistSamplerSeedHook,
+    EpochBasedRunner,
+    Fp16OptimizerHook,
+    OptimizerHook,
+    build_optimizer,
+    build_runner,
+)
 from mmdet.core import DistEvalHook, EvalHook
-from mmdet.datasets import (build_dataloader, build_dataset,
-                            replace_ImageToTensor)
+from mmdet.datasets import (
+    build_dataloader,
+    build_dataset,
+    replace_ImageToTensor,
+)
 
-from mmrotate.utils import (build_ddp, build_dp, compat_cfg,
-                            find_latest_checkpoint, get_root_logger)
+from mmrotate.utils import (
+    build_ddp,
+    build_dp,
+    compat_cfg,
+    find_latest_checkpoint,
+    get_root_logger,
+)
 
 
 def train_detector(model,

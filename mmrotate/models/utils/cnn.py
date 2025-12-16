@@ -40,6 +40,7 @@ def make_divisible(value, divisor, min_value=None, min_ratio=0.9):
 
 
 class BCHW2BHWC(nn.Module):
+
     def __init__(self):
         super().__init__()
 
@@ -49,6 +50,7 @@ class BCHW2BHWC(nn.Module):
 
 
 class BHWC2BCHW(nn.Module):
+
     def __init__(self):
         super().__init__()
 

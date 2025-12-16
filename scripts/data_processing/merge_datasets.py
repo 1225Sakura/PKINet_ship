@@ -3,16 +3,13 @@
 合并LAFI和DOTA ship-only数据集
 """
 
-import os
 import shutil
 from pathlib import Path
+
 from tqdm import tqdm
 
-def merge_datasets(
-    lafi_dir,
-    dota_ship_dir,
-    output_dir
-):
+
+def merge_datasets(lafi_dir, dota_ship_dir, output_dir):
     """
     合并LAFI和DOTA船舶数据集
 
@@ -88,15 +85,15 @@ def main():
     dota_ship_dir = '/home/user/PKINet/data/dota_ship_only'
     output_dir = '/home/user/PKINet/data/combined_ship_dataset'
 
-    print("="*60)
+    print("=" * 60)
     print("合并LAFI和DOTA ship-only数据集")
-    print("="*60)
+    print("=" * 60)
 
     merge_datasets(lafi_dir, dota_ship_dir, output_dir)
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("合并完成!")
-    print("="*60)
+    print("=" * 60)
     print(f"输出目录: {output_dir}")
 
     # 最终统计
@@ -105,7 +102,7 @@ def main():
     val_ann = len(list(Path(output_dir).glob('val/annfiles/*.txt')))
     val_img = len(list(Path(output_dir).glob('val/images/*.png')))
 
-    print(f"\n最终统计:")
+    print("\n最终统计:")
     print(f"  训练集: {train_ann} 个标注, {train_img} 个图像")
     print(f"  验证集: {val_ann} 个标注, {val_img} 个图像")
     print(f"  总计: {train_ann + val_ann} 个标注, {train_img + val_img} 个图像")

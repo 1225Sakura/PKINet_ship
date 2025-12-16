@@ -5,10 +5,11 @@
 2. 统计所有船舶类别
 """
 
-import os
-from pathlib import Path
 from collections import Counter
+from pathlib import Path
+
 from tqdm import tqdm
+
 
 def analyze_and_unify(dataset_dir):
     """
@@ -50,10 +51,7 @@ def analyze_and_unify(dataset_dir):
 
             # 如果没有元数据，添加元数据
             if not has_metadata and annotations:
-                metadata = [
-                    "imagesource:combined\n",
-                    "gsd:0.5\n"
-                ]
+                metadata = ["imagesource:combined\n", "gsd:0.5\n"]
                 with open(ann_file, 'w', encoding='utf-8') as f:
                     f.writelines(metadata)
                     f.writelines(annotations)
@@ -86,10 +84,7 @@ def unify_to_ship_class(dataset_dir):
                 metadata = lines[:2]
                 annotations = lines[2:]
             else:
-                metadata = [
-                    "imagesource:combined\n",
-                    "gsd:0.5\n"
-                ]
+                metadata = ["imagesource:combined\n", "gsd:0.5\n"]
                 annotations = lines
 
             # 统一类别为 ship
@@ -110,32 +105,33 @@ def unify_to_ship_class(dataset_dir):
 def main():
     dataset_dir = '/home/user/PKINet/data/combined_ship_dataset'
 
-    print("="*60)
+    print("=" * 60)
     print("分析数据集类别")
-    print("="*60)
+    print("=" * 60)
 
     # 分析类别
     all_classes = analyze_and_unify(dataset_dir)
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("类别统计:")
-    print("="*60)
-    for class_name, count in sorted(all_classes.items(), key=lambda x: x[1], reverse=True):
+    print("=" * 60)
+    for class_name, count in sorted(
+            all_classes.items(), key=lambda x: x[1], reverse=True):
         print(f"  {class_name}: {count}")
 
     print(f"\n总类别数: {len(all_classes)}")
 
     # 询问是否统一为ship类别
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("统一所有类别为 'ship'")
-    print("="*60)
+    print("=" * 60)
 
     # 直接统一为ship
     unify_to_ship_class(dataset_dir)
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("完成!")
-    print("="*60)
+    print("=" * 60)
     print("所有标注已统一为 'ship' 类别")
 
 

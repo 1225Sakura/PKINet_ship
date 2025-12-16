@@ -33,7 +33,10 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
-        ann_file=[data_root + 'ImageSets/Main/train.txt', data_root + 'ImageSets/Main/val.txt'],
+        ann_file=[
+            data_root + 'ImageSets/Main/train.txt',
+            data_root + 'ImageSets/Main/val.txt'
+        ],
         ann_subdir=data_root + 'Annotations/Oriented Bounding Boxes/',
         img_subdir=data_root + 'JPEGImages-trainval/',
         img_prefix=data_root + 'JPEGImages-trainval/',

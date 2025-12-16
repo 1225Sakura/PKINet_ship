@@ -1,7 +1,6 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import copy
 import platform
-
 from mmcv.utils import build_from_cfg
 from mmdet.datasets import DATASETS, PIPELINES
 from mmdet.datasets.builder import _concat_dataset
@@ -20,10 +19,12 @@ if platform.system() != 'Windows':
 
 
 def build_dataset(cfg, default_args=None):
-    from mmdet.datasets.dataset_wrappers import (ClassBalancedDataset,
-                                                 ConcatDataset,
-                                                 MultiImageMixDataset,
-                                                 RepeatDataset)
+    from mmdet.datasets.dataset_wrappers import (
+        ClassBalancedDataset,
+        ConcatDataset,
+        MultiImageMixDataset,
+        RepeatDataset,
+    )
     if isinstance(cfg, (list, tuple)):
         dataset = ConcatDataset([build_dataset(c, default_args) for c in cfg])
     elif cfg['type'] == 'ConcatDataset':

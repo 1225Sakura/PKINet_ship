@@ -1,7 +1,6 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-import math
-
 import cv2
+import math
 import numpy as np
 import torch
 
